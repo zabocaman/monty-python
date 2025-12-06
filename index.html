@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Monty Hall Problem</title>
+</head>
+<body>
+    <h1>The Monty Hall Problem</h1>
+
+    <!-- This script simulates the Monty Hall problem 10,000 times and displays the results on the webpage. -->
+
+    <script>
+
+    let switchCounter = 0;
+    let stayCounter = 0;
+
+    for(let i = 0; i < 1000; i ++) {
+  
+    // STEP 1 - A car is placed behind a door.
+    let car = Math.ceil(Math.random() * 3); // Randomly place the car behind one of the three doors.
+    document.write("<p>The car is behind door number: " + car + "</p>"); // Puts text on the page instead of console.
+
+    // STEP 2 - Contestant chooses a door.
+    let choice = Math.ceil(Math.random() * 3); // Contestant randomly picks a door. 
+    document.write("<p>The contestant chose door number: " + choice + "</p>");
+
+    // STEPS 3 & 4 - Remove a door & check the removed door.
+    let removed; // do statement is used to ensure the removed door is not the car or the contestant's choice.
+    do 
+    {
+        removed = Math.ceil(Math.random() * 3);
+    }
+    while (removed === car || removed === choice);
+    document.write("<p>The host removes door number: " + removed + "</p>");
+
+    // STEP 5 - Display the solution.
+    if (choice == car)
+    {
+        stayCounter++;
+        document.write("<p style='color: red;'>The contestant should stay.</p>");
+    }
+    else
+    {
+        switchCounter++;
+        document.write("<p style='color: green;'>The contestant should switch.</p>");
+    }
+
+    document.write("<hr>"); // Adds a horizontal line between each simulation.
+
+    }
+
+    // STEP 6 - Repeat the process 1,000 times. 
+    // See the for loop at the start of the code.
+
+    // STEP 7 - Add counters to track outcomes based on the solution.
+    // See switchCounter and stayCounter variables at the start of the code.
+    let percent = Math.round(switchCounter / 1000 * 100);
+    document.write("<h2>Switching was correct " + percent + "% of the time.</h2>");
+
+    </script>
+
+</body>
+</html>
+
