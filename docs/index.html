@@ -4,58 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Monty Hall Problem</title>
+    <title>The Monty Hall Problem – Interactive</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>The Monty Hall Problem</h1>
-    <!-- This script simulates the Monty Hall problem 10,000 times and displays the results on the webpage. -->
-    <script>
+    <main class="container">
+        <h1>The Monty Hall Problem</h1>
+        <p class="intro">
+            Pick a door. The host will open one of the other doors to show a goat.
+            Then you can choose to <strong>stay</strong> with your original door
+            or <strong>switch</strong> to the remaining unopened door.
+        </p>
 
-    let switchCounter = 0;
-    let stayCounter = 0;
+        <section id="game" class="game">
+            <div id="doors" class="doors" aria-label="Doors">
+                <button class="door" data-door="1">Door 1</button>
+                <button class="door" data-door="2">Door 2</button>
+                <button class="door" data-door="3">Door 3</button>
+            </div>
 
-    for(let i = 0; i < 1000; i ++) {
-  
-        // STEP 1 - A car is placed behind a door.
-        let car = Math.ceil(Math.random() * 3); // Randomly place the car behind one of the three doors.
-        document.write("<p>The car is behind door number: " + car + "</p>");
+            <p id="message" class="message">Choose a door to start.</p>
 
-        // STEP 2 - Contestant chooses a door.
-        let choice = Math.ceil(Math.random() * 3); // Contestant randomly picks a door. 
-        document.write("<p>The contestant chose door number: " + choice + "</p>");
+            <div class="actions">
+                <button id="btnStay" disabled>Stay</button>
+                <button id="btnSwitch" disabled>Switch</button>
+                <button id="btnNext" disabled>Play again</button>
+            </div>
 
-        // STEPS 3 & 4 - Remove a door & check the removed door.
-        let removed; // ensure the removed door is not the car or the contestant's choice.
-        do 
-        {
-            removed = Math.ceil(Math.random() * 3);
-        }
-        while (removed === car || removed === choice);
-        document.write("<p>The host removes door number: " + removed + "</p>");
+            <section id="stats" class="stats" aria-label="Statistics">
+                <h2>Stats</h2>
+                <p>Rounds played: <span id="rounds">0</span></p>
+                <p>Staying wins: <span id="stayWins">0</span> (<span id="stayPct">0</span>%)</p>
+                <p>Switching wins: <span id="switchWins">0</span> (<span id="switchPct">0</span>%)</p>
+            </section>
+        </section>
+    </main>
 
-        // STEP 5 - Display the solution.
-        if (choice == car)
-        {
-            stayCounter++;
-            document.write("<p style='color: red;'>The contestant should stay.</p>");
-        }
-        else
-        {
-            switchCounter++;
-            document.write("<p style='color: green;'>The contestant should switch.</p>");
-        }
-
-        document.write("<hr>"); // Adds a horizontal line between each simulation.
-    }
-
-    // STEP 6 - Repeat the process 1,000 times. 
-    // See the for loop at the start of the code.
-
-    // STEP 7 - Add counters to track outcomes based on the solution.
-    // See switchCounter and stayCounter variables at the start of the code.
-    let percent = Math.round(switchCounter / 1000 * 100);
-    document.write("<h2>Switching was correct " + percent + "% of the time.</h2>");
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
